@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Stripe;
 
 namespace CrawfishCupWebAPI
 {
@@ -14,6 +12,10 @@ namespace CrawfishCupWebAPI
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            StripeConfiguration.SetApiKey(ConfigurationManager.AppSettings["stripeSecretKey"]);
+            Bootstrapper.Run();
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
