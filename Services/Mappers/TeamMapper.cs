@@ -10,11 +10,12 @@ namespace Services.Mappers
     {
         public Team Map(TeamWithPlayers teamWithPlayers, IEnumerable<Rating> ratings)
         {
+            var rid = ratings.SingleOrDefault(x => x.Ntrp == teamWithPlayers.Ntrp) == null ? 1 : ratings.Single(x => x.Ntrp == teamWithPlayers.Ntrp).Id;
             return new Team()
             {
                 Name = teamWithPlayers.Name,
                 Gender = teamWithPlayers.Gender,
-                RatingId = ratings.Single(x => x.Ntrp == teamWithPlayers.Ntrp).Id
+                RatingId = rid
             };
         }
     }

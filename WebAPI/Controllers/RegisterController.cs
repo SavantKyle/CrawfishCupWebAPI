@@ -42,7 +42,7 @@ namespace WebAPI.Controllers
                         ReasonPhrase = ex.Message
                     });
             }
-
+            
             _registerFacade.RegisterTeam(teamAndPaymentInfo.TeamWithPlayers);
 
             return Ok();

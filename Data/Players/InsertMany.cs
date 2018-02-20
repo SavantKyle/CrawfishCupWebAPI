@@ -17,11 +17,9 @@ namespace Data.Players
         public void Execute(ICommandQuery commandQuery)
         {
             var sql = $@"Insert into Players (FirstName, LastName, Email, Phone, RatingId, TeamId)
-                        {string.Join(" UNION ALL ", _players.Select(x =>
-                        $@"select '{x.FirstName}' as FirstName, '{x.LastName}' as LastName, '{x.Email}' as Email, 
-                        '{x.Phone}' as Phone, {x.RatingId} as RatingId, {x.TeamId} as TeamId"))}";
+                        values (@FirstName, @LastName, @Email, @Phone, @RatingId, @TeamId)";
 
-            commandQuery.Execute(sql, null);
+            commandQuery.Execute(sql, _players);
         }
     }
 }

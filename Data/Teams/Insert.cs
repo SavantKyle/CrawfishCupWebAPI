@@ -17,7 +17,7 @@ namespace Data.Teams
             var sql = @"Insert into Teams (Gender, Name, RatingId) values (@Gender, @Name, @RatingId); 
                         select cast(scope_identity() as int)";
 
-            _team.Id = commandQuery.Query<int>(sql, new { _team.Gender, _team.Name, _team.RatingId }).First();
+            _team.Id = commandQuery.Query<int>(sql, _team).First();
 
             return _team;
         }

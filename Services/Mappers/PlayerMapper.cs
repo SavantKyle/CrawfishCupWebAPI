@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Models.Domain;
 using Models.Entity;
@@ -16,9 +17,15 @@ namespace Services.Mappers
                 LastName = x.LastName,
                 Email = x.Email,
                 Phone = x.Phone,
-                RatingId = ratings.Single(y => x.Ntrp == y.Ntrp).Id,
+                RatingId = GetRatingId(x.Ntrp, ratings),
                 TeamId = teamId
-            }); 
+            });
+        }
+
+        private int GetRatingId(string ntrp, IEnumerable<Rating> ratings)
+        {
+            var rid = ratings.SingleOrDefault(x => x.Ntrp == ntrp);
+            return rid?.Id ?? 1;
         }
     }
 }

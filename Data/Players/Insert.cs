@@ -17,7 +17,7 @@ namespace Data.Players
         {
             var sql = @"Insert into Players (FirstName, LastName, Email, Phone, RatingId, TeamId) values (@FirstName, @LastName, @Email, @Phone, @RatingId, @TeamId);
                         select cast(scope_identity() as int)";
-            _player.Id = commandQuery.Query<int>(sql, new { _player }).First();
+            _player.Id = commandQuery.Query<int>(sql, _player).First();
             return _player;
         }
     }
